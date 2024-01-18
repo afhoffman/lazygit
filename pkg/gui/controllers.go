@@ -126,6 +126,7 @@ func (gui *Gui) resetHelpersAndControllers() {
 		Search:     searchHelper,
 		Worktree:   worktreeHelper,
 		SubCommits: helpers.NewSubCommitsHelper(helperCommon, refreshHelper, setSubCommits),
+		ArchiveBundle: helpers.NewArchiveBundleHelper(helperCommon),
 	}
 
 	gui.CustomCommandsClient = custom_commands.NewClient(

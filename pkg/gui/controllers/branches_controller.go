@@ -143,6 +143,11 @@ func (self *BranchesController) GetKeybindings(opts types.KeybindingsOpts) []*ty
 			Tooltip:           self.c.Tr.ViewBranchUpstreamOptionsTooltip,
 			OpensMenu:         true,
 		},
+		{
+			Description: "Archive and bundle options",
+			Handler:     self.checkSelected(self.createArchiveBundleMenu),
+			OpensMenu:   true,
+		},
 	}
 }
 
@@ -532,6 +537,23 @@ func (self *BranchesController) forceDelete(branch *models.Branch) error {
 			}
 			return self.c.Refresh(types.RefreshOptions{Mode: types.ASYNC, Scope: []types.RefreshableView{types.BRANCHES}})
 		},
+	})
+}
+
+func (self *BranchesController) createArchiveBundleMenu(branch *models.Branch) error {
+	archiveItem := &types.MenuItem{
+		Label: "Create archive",
+		Key:   'a',
+		OnPress: func() error {
+			return self.c.Helpers().ArchiveBundle.CreateArchive(branch.RefName())
+		},
+	}
+
+	menuTitle := "Create archive or bundle"
+
+	return self.c.Menu(types.CreateMenuOptions{
+		Title: menuTitle,
+		Items: []*types.MenuItem{archiveItem},
 	})
 }
 
