@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"strings"
 
+	"github.com/jesseduffield/gocui"
 	"github.com/jesseduffield/lazygit/pkg/gui/types"
 )
 
@@ -78,5 +79,7 @@ func (self *ArchiveBundleHelper) CreateArchive(refName string) error {
 }
 
 func (self *ArchiveBundleHelper) runArchiveCommand(refName string, fileName string, prefix string, suffix string) error {
-	return self.c.Git().Archive.Archive(refName, fileName+suffix, prefix)
+	return self.c.WithWaitingStatus("Archiving...", func(gocui.Task) error {
+		return self.c.Git().Archive.Archive(refName, fileName+suffix, prefix)
+	})
 }
