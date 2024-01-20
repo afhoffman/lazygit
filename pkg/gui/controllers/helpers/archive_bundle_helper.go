@@ -1,7 +1,6 @@
 package helpers
 
 import (
-	"fmt"
 	"strings"
 
 	"github.com/jesseduffield/gocui"
@@ -21,9 +20,6 @@ func NewArchiveBundleHelper(
 }
 
 func (self *ArchiveBundleHelper) CreateArchive(refName string) error {
-	self.c.LogAction(fmt.Sprintf("create archive called %s", refName))
-
-	// TODO: Add a waiting status thingy
 	return self.c.Prompt(types.PromptOpts{
 		Title: "Name of folder inside archive (optional)",
 		HandleConfirm: func(prefix string) error {
@@ -33,44 +29,31 @@ func (self *ArchiveBundleHelper) CreateArchive(refName string) error {
 			if prefix != "" && !strings.HasSuffix(prefix, "/") {
 				prefix += "/"
 			}
-			self.c.LogAction(fmt.Sprintf("Selected prefix: %s", prefix))
 
 			return self.c.Prompt(types.PromptOpts{
 				Title: "Choose an archive name (without extension)",
 				HandleConfirm: func(fileName string) error {
-					self.c.LogAction(fmt.Sprintf("Selected fileName has no extension: %s", fileName))
+					validArchiveFormats, err := self.c.Git().Archive.GetValidArchiveFormats()
+					if err != nil {
+						return err
+					}
+
+					menuItems := make([]*types.MenuItem, len(validArchiveFormats))
+
+					for i, format := range validArchiveFormats {
+						format := format
+
+						menuItems[i] = &types.MenuItem{
+							Label: format,
+							OnPress: func() error {
+								return self.runArchiveCommand(refName, fileName, prefix, format)
+							},
+						}
+					}
+
 					return self.c.Menu(types.CreateMenuOptions{
-						Title: "Amend commit attribute",
-						Items: []*types.MenuItem{
-							{
-								Label: ".zip",
-								OnPress: func() error {
-									return self.runArchiveCommand(refName, fileName, prefix, ".zip")
-								},
-								Key: '1',
-							},
-							{
-								Label: ".tar.gz",
-								OnPress: func() error {
-									return self.runArchiveCommand(refName, fileName, prefix, ".tar.gz")
-								},
-								Key: '2',
-							},
-							{
-								Label: ".tar",
-								OnPress: func() error {
-									return self.runArchiveCommand(refName, fileName, prefix, ".tar")
-								},
-								Key: '3',
-							},
-							{
-								Label: ".tgz",
-								OnPress: func() error {
-									return self.runArchiveCommand(refName, fileName, prefix, ".tgz")
-								},
-								Key: '4',
-							},
-						},
+						Title: "Select archive format",
+						Items: menuItems,
 					})
 				},
 			})

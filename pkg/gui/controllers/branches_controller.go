@@ -145,7 +145,7 @@ func (self *BranchesController) GetKeybindings(opts types.KeybindingsOpts) []*ty
 		},
 		{
 			Description: "Archive and bundle options",
-			Handler:     self.checkSelected(self.createArchiveBundleMenu),
+			Handler:     self.withItem(self.createArchiveBundleMenu),
 			OpensMenu:   true,
 		},
 	}
