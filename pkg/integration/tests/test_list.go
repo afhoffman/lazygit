@@ -4,6 +4,7 @@ package tests
 
 import (
 	"github.com/jesseduffield/lazygit/pkg/integration/components"
+	"github.com/jesseduffield/lazygit/pkg/integration/tests/archive_and_bundle"
 	"github.com/jesseduffield/lazygit/pkg/integration/tests/bisect"
 	"github.com/jesseduffield/lazygit/pkg/integration/tests/branch"
 	"github.com/jesseduffield/lazygit/pkg/integration/tests/cherry_pick"
@@ -31,6 +32,7 @@ import (
 )
 
 var tests = []*components.IntegrationTest{
+	archive_and_bundle.ArchiveBranch,
 	bisect.Basic,
 	bisect.ChooseTerms,
 	bisect.FromOtherBranch,
