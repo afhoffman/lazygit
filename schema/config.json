@@ -1031,6 +1031,10 @@
             "sortOrder": {
               "type": "string",
               "default": "s"
+            },
+            "archiveOrBundle": {
+              "type": "string",
+              "default": "a"
             }
           },
           "additionalProperties": false,

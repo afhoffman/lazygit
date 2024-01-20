@@ -144,7 +144,8 @@ func (self *BranchesController) GetKeybindings(opts types.KeybindingsOpts) []*ty
 			OpensMenu:         true,
 		},
 		{
-			Description: "Archive and bundle options",
+			Key:         opts.GetKey(opts.Config.Branches.ArchiveOrBundle),
+			Description: self.c.Tr.ViewArchiveAndBundleOptions,
 			Handler:     self.withItem(self.createArchiveBundleMenu),
 			OpensMenu:   true,
 		},
@@ -540,23 +541,6 @@ func (self *BranchesController) forceDelete(branch *models.Branch) error {
 	})
 }
 
-func (self *BranchesController) createArchiveBundleMenu(branch *models.Branch) error {
-	archiveItem := &types.MenuItem{
-		Label: "Create archive",
-		Key:   'a',
-		OnPress: func() error {
-			return self.c.Helpers().ArchiveBundle.CreateArchive(branch.RefName())
-		},
-	}
-
-	menuTitle := "Create archive or bundle"
-
-	return self.c.Menu(types.CreateMenuOptions{
-		Title: menuTitle,
-		Items: []*types.MenuItem{archiveItem},
-	})
-}
-
 func (self *BranchesController) delete(branch *models.Branch) error {
 	checkedOutBranch := self.c.Helpers().Refs.GetCheckedOutRef()
 
@@ -803,4 +787,19 @@ func (self *BranchesController) branchIsReal(branch *models.Branch) *types.Disab
 	}
 
 	return nil
+}
+
+func (self *BranchesController) createArchiveBundleMenu(branch *models.Branch) error {
+	archiveItem := &types.MenuItem{
+		Label: self.c.Tr.ArchiveMenuItemArchive,
+		Key:   'a',
+		OnPress: func() error {
+			return self.c.Helpers().ArchiveBundle.CreateArchive(branch.RefName())
+		},
+	}
+
+	return self.c.Menu(types.CreateMenuOptions{
+		Title: self.c.Tr.ArchiveBundleMenuTitle,
+		Items: []*types.MenuItem{archiveItem},
+	})
 }

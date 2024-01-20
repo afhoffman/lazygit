@@ -192,6 +192,7 @@ _Связки клавиш_
   <kbd>g</kbd>: Просмотреть параметры сброса
   <kbd>R</kbd>: Переименовать ветку
   <kbd>u</kbd>: View upstream options
+  <kbd>a</kbd>: View archive and bundle options
   <kbd>w</kbd>: View worktree options
   <kbd>&lt;enter&gt;</kbd>: Просмотреть коммиты
   <kbd>/</kbd>: Filter the current view by text

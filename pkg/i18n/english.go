@@ -433,6 +433,14 @@ type TranslationSet struct {
 	UpstreamNotSetError                 string
 	NewGitFlowBranchPrompt              string
 	RenameBranchWarning                 string
+	ViewArchiveAndBundleOptions         string
+	ArchiveBundleMenuTitle              string
+	ArchiveMenuItemArchive              string
+	ArchiveMenuItemBundle               string
+	ArchiveChoosePrefixTitle            string
+	ArchiveChooseFileName               string
+	ArchiveChooseFormatMenuTitle        string
+	ArchiveWaitingStatusMessage         string
 	OpenMenu                            string
 	ResetCherryPick                     string
 	NextTab                             string
@@ -1270,6 +1278,14 @@ func EnglishTranslationSet() TranslationSet {
 		ViewBranchUpstreamOptions:        "View upstream options",
 		NewBranchNamePrompt:              "Enter new branch name for branch",
 		RenameBranchWarning:              "This branch is tracking a remote. This action will only rename the local branch name, not the name of the remote branch. Continue?",
+		ViewArchiveAndBundleOptions:      "View archive and bundle options",
+		ArchiveBundleMenuTitle:           "Create archive or bundle",
+		ArchiveMenuItemArchive:           "archive",
+		ArchiveMenuItemBundle:            "bundle",
+		ArchiveChoosePrefixTitle:         "Name of folder inside archive (optional)",
+		ArchiveChooseFileName:            "Choose an archive name (without extension)",
+		ArchiveChooseFormatMenuTitle:     "Select archive format",
+		ArchiveWaitingStatusMessage:      "Archiving...",
 		OpenMenu:                         "Open menu",
 		ResetCherryPick:                  "Reset cherry-picked (copied) commits selection",
 		NextTab:                          "Next tab",

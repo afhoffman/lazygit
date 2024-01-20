@@ -268,6 +268,7 @@ _說明：`<c-b>` 表示 Ctrl+B、`<a-b>` 表示 Alt+B，`B`表示 Shift+B_
   <kbd>g</kbd>: 檢視重設選項
   <kbd>R</kbd>: 重新命名分支
   <kbd>u</kbd>: View upstream options
+  <kbd>a</kbd>: View archive and bundle options
   <kbd>w</kbd>: View worktree options
   <kbd>&lt;enter&gt;</kbd>: 檢視提交
   <kbd>/</kbd>: Filter the current view by text
