@@ -1,6 +1,7 @@
 package helpers
 
 import (
+	"fmt"
 	"strings"
 
 	"github.com/jesseduffield/gocui"
@@ -62,6 +63,7 @@ func (self *ArchiveBundleHelper) CreateArchive(refName string) error {
 }
 
 func (self *ArchiveBundleHelper) runArchiveCommand(refName string, fileName string, prefix string, suffix string) error {
+	self.c.LogAction(fmt.Sprintf("Creating archive for ref: %s", refName))
 	return self.c.WithWaitingStatus(self.c.Tr.ArchiveWaitingStatusMessage, func(gocui.Task) error {
 		return self.c.Git().Archive.Archive(refName, fileName+suffix, prefix)
 	})
