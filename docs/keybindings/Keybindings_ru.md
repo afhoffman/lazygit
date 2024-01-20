@@ -286,6 +286,7 @@ _Связки клавиш_
   <kbd>P</kbd>: Отправить тег
   <kbd>n</kbd>: Создать тег
   <kbd>g</kbd>: Просмотреть параметры сброса
+  <kbd>a</kbd>: View archive and bundle options
   <kbd>w</kbd>: View worktree options
   <kbd>&lt;enter&gt;</kbd>: Просмотреть коммиты
   <kbd>/</kbd>: Filter the current view by text

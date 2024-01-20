@@ -338,6 +338,7 @@ _Legend: `<c-b>` means ctrl+b, `<a-b>` means alt+b, `B` means shift+b_
   <kbd>P</kbd>: Push tag
   <kbd>n</kbd>: Create tag
   <kbd>g</kbd>: Wyświetl opcje resetu
+  <kbd>a</kbd>: View archive and bundle options
   <kbd>w</kbd>: View worktree options
   <kbd>&lt;enter&gt;</kbd>: View commits
   <kbd>/</kbd>: Filter the current view by text

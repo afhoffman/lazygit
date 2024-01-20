@@ -63,6 +63,12 @@ func (self *TagsController) GetKeybindings(opts types.KeybindingsOpts) []*types.
 			Description:       self.c.Tr.ViewResetOptions,
 			OpensMenu:         true,
 		},
+		{
+			Key:         opts.GetKey(opts.Config.Branches.ArchiveOrBundle),
+			Handler:     self.withItem(self.createArchiveBundleMenu),
+			Description: self.c.Tr.ViewArchiveAndBundleOptions,
+			OpensMenu:   true,
+		},
 	}
 
 	return bindings
@@ -227,4 +233,19 @@ func (self *TagsController) create() error {
 
 func (self *TagsController) context() *context.TagsContext {
 	return self.c.Contexts().Tags
+}
+
+func (self *TagsController) createArchiveBundleMenu(tag *models.Tag) error {
+	archiveItem := &types.MenuItem{
+		Label: self.c.Tr.ArchiveMenuItemArchive,
+		Key:   'a',
+		OnPress: func() error {
+			return self.c.Helpers().ArchiveBundle.CreateArchive(tag.RefName())
+		},
+	}
+
+	return self.c.Menu(types.CreateMenuOptions{
+		Title: self.c.Tr.ArchiveBundleMenuTitle,
+		Items: []*types.MenuItem{archiveItem},
+	})
 }

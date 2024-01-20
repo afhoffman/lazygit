@@ -319,6 +319,7 @@ _Legend: `<c-b>` means ctrl+b, `<a-b>` means alt+b, `B` means shift+b_
   <kbd>P</kbd>: 태그를 push
   <kbd>n</kbd>: 태그를 생성
   <kbd>g</kbd>: View reset options
+  <kbd>a</kbd>: View archive and bundle options
   <kbd>w</kbd>: View worktree options
   <kbd>&lt;enter&gt;</kbd>: 커밋 보기
   <kbd>/</kbd>: Filter the current view by text
