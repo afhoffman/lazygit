@@ -1036,6 +1036,9 @@
             "sortOrder": {
               "type": "string",
               "default": "s"
+            },
+            "bundle": {
+              "type": "string"
             }
           },
           "additionalProperties": false,

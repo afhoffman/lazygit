@@ -6,6 +6,7 @@ import (
 	"github.com/jesseduffield/lazygit/pkg/integration/components"
 	"github.com/jesseduffield/lazygit/pkg/integration/tests/bisect"
 	"github.com/jesseduffield/lazygit/pkg/integration/tests/branch"
+	"github.com/jesseduffield/lazygit/pkg/integration/tests/bundle"
 	"github.com/jesseduffield/lazygit/pkg/integration/tests/cherry_pick"
 	"github.com/jesseduffield/lazygit/pkg/integration/tests/commit"
 	"github.com/jesseduffield/lazygit/pkg/integration/tests/config"
@@ -59,6 +60,8 @@ var tests = []*components.IntegrationTest{
 	branch.SortRemoteBranches,
 	branch.Suggestions,
 	branch.UnsetUpstream,
+	bundle.Branch,
+	bundle.Tag,
 	cherry_pick.CherryPick,
 	cherry_pick.CherryPickConflicts,
 	cherry_pick.CherryPickDuringRebase,

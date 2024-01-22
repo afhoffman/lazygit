@@ -519,6 +519,16 @@ type TranslationSet struct {
 	RenameBranchWarning                   string
 	OpenKeybindingsMenu                   string
 	ResetCherryPick                       string
+	ViewArchiveAndBundleOptions           string
+	ArchiveBundleMenuTitle                string
+	ArchiveMenuItemBundle                 string
+	ArchiveMenuItemArchive                string
+	ArchiveChoosePrefixTitle              string
+	ArchiveChooseFileName                 string
+	ArchiveChooseFormatMenuTitle          string
+	ArchiveWaitingStatusMessage           string
+	BundleChooseBundleName                string
+	BundleWaitingStatusMessage            string
 	NextTab                               string
 	PrevTab                               string
 	CantUndoWhileRebasing                 string
@@ -1466,6 +1476,16 @@ func EnglishTranslationSet() TranslationSet {
 		RenameBranchWarning:              "This branch is tracking a remote. This action will only rename the local branch name, not the name of the remote branch. Continue?",
 		OpenKeybindingsMenu:              "Open keybindings menu",
 		ResetCherryPick:                  "Reset copied (cherry-picked) commits selection",
+		ViewArchiveAndBundleOptions:      "View archive and bundle options",
+		ArchiveBundleMenuTitle:           "Create archive or bundle",
+		ArchiveMenuItemArchive:           "Create archive",
+		ArchiveMenuItemBundle:            "Create bundle",
+		ArchiveChoosePrefixTitle:         "Name of folder inside archive (optional)",
+		ArchiveChooseFileName:            "Choose an archive name (without extension)",
+		ArchiveChooseFormatMenuTitle:     "Select archive format",
+		ArchiveWaitingStatusMessage:      "Archiving...",
+		BundleChooseBundleName:           "Choose bundle name",
+		BundleWaitingStatusMessage:       "Bundling...",
 		NextTab:                          "Next tab",
 		PrevTab:                          "Previous tab",
 		CantUndoWhileRebasing:            "Can't undo while rebasing",

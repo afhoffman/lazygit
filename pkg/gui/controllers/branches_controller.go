@@ -159,6 +159,12 @@ func (self *BranchesController) GetKeybindings(opts types.KeybindingsOpts) []*ty
 			OpensMenu:         true,
 			DisplayOnScreen:   true,
 		},
+		{
+			Key:         opts.GetKey(opts.Config.Branches.Bundle),
+			Description: self.c.Tr.ViewArchiveAndBundleOptions,
+			Handler:     self.withItem(self.createBundleMenu),
+			OpensMenu:   true,
+		},
 	}
 }
 
@@ -797,4 +803,19 @@ func (self *BranchesController) branchIsReal(branch *models.Branch) *types.Disab
 	}
 
 	return nil
+}
+
+func (self *BranchesController) createBundleMenu(branch *models.Branch) error {
+	return self.c.Menu(types.CreateMenuOptions{
+		Title: self.c.Tr.ArchiveBundleMenuTitle,
+		Items: []*types.MenuItem{
+			{
+				Label: self.c.Tr.ArchiveMenuItemBundle,
+				Key:   'b',
+				OnPress: func() error {
+					return self.c.Helpers().ArchiveBundle.CreateBundle(branch.RefName())
+				},
+			},
+		},
+	})
 }
