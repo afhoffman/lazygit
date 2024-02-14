@@ -101,8 +101,8 @@ func (self *FilesController) GetKeybindings(opts types.KeybindingsOpts) []*types
 		},
 		{
 			Key:               opts.GetKey(opts.Config.Files.IgnoreFile),
-			Handler:           self.withItem(self.ignoreOrExcludeMenu),
-			GetDisabledReason: self.require(self.singleItemSelected()),
+			Handler:           self.withItems(self.ignoreOrExcludeMenu),
+			GetDisabledReason: self.require(self.itemsSelected()),
 			Description:       self.c.Tr.Actions.IgnoreExcludeFile,
 			OpensMenu:         true,
 		},
@@ -632,15 +632,23 @@ func (self *FilesController) exclude(node *filetree.FileNode) error {
 	return nil
 }
 
-func (self *FilesController) ignoreOrExcludeMenu(node *filetree.FileNode) error {
+func (self *FilesController) ignoreOrExcludeMenu(nodes []*filetree.FileNode) error {
 	return self.c.Menu(types.CreateMenuOptions{
 		Title: self.c.Tr.Actions.IgnoreExcludeFile,
 		Items: []*types.MenuItem{
 			{
 				LabelColumns: []string{self.c.Tr.IgnoreFile},
 				OnPress: func() error {
-					if err := self.ignore(node); err != nil {
-						return self.c.Error(err)
+					selectedNodes := normalisedSelectedNodes(nodes)
+
+					for _, node := range selectedNodes {
+						if err := self.ignore(node); err != nil {
+							return self.c.Error(err)
+						}
+					}
+
+					if self.context().RangeSelectEnabled() {
+						self.context().GetList().CancelRangeSelect()
 					}
 					return nil
 				},
@@ -649,8 +657,14 @@ func (self *FilesController) ignoreOrExcludeMenu(node *filetree.FileNode) error 
 			{
 				LabelColumns: []string{self.c.Tr.ExcludeFile},
 				OnPress: func() error {
-					if err := self.exclude(node); err != nil {
-						return self.c.Error(err)
+					for _, node := range nodes {
+						if err := self.exclude(node); err != nil {
+							return self.c.Error(err)
+						}
+					}
+
+					if self.context().RangeSelectEnabled() {
+						self.context().GetList().CancelRangeSelect()
 					}
 					return nil
 				},
